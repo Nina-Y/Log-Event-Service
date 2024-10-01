@@ -25,7 +25,7 @@ public class LogEventService {
         loadLogEvents();
     }
 
-    private void loadLogEvents() {
+    public void loadLogEvents() {
         File file = new File(FILE_PATH);
         if (file.exists()) {
             System.out.println("File already exists at: " + FILE_PATH);
