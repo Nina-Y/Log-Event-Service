@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Log Event Details</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/5.0.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h1 class="mt-4">Log Event Details</h1>
+    <div class="mt-5">
+        <table class="table table-bordered">
+            <tr>
+                <th>ID</th>
+                <td th:text="${logEvent.id}"></td>
+            </tr>
+            <tr>
+                <th>Timestamp</th>
+                <td th:text="${logEvent.timestamp}"></td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td th:text="${logEvent.type}"></td>
+            </tr>
+            <tr>
+                <th>Message</th>
+                <td th:text="${logEvent.message}"></td>
+            </tr>
+            <tr>
+                <th>User ID</th>
+                <td th:text="${logEvent.userId}"></td>
+            </tr>
+            <tr>
+                <th>Transaction ID</th>
+                <td th:text="${logEvent.transactionId}"></td>
+            </tr>
+        </table>
+        <a href="/ui/logs" class="btn btn-secondary">Back to Log List</a>
+    </div>
+</div>
+<script src="/webjars/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

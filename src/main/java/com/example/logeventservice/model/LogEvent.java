@@ -1,5 +1,6 @@
 package com.example.logeventservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -33,6 +34,10 @@ public class LogEvent {
         this.message = message;
         this.userId = userId;
         this.transactionId = transactionId;
+    }
+
+    public LogEvent() {
+
     }
 
     public int getId() {
