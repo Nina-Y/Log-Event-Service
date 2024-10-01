@@ -49,6 +49,7 @@ public class LogEventUIController {
     @PostMapping("/add")
     public String addLogEvent(@ModelAttribute LogEvent logEvent) {
         logEvent.setTimestamp(LocalDateTime.parse(LocalDateTime.now().format(FORMATTER)));
+        logEventService.addLogEvent(logEvent);
         return "redirect:/ui/logs";
     }
 
