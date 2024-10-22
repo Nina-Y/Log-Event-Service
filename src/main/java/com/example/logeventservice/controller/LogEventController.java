@@ -22,6 +22,8 @@ public class LogEventController {
         this.logEventService = logEventService;
     }
 
+    // Tools like Swagger/ Postman can be used, eg. http://localhost:8080/swagger-ui/index.html
+
     @GetMapping
     public List<LogEvent> getAllLogEvents() {
         return logEventService.getAllLogEvents();

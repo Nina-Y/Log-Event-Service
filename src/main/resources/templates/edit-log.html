@@ -7,7 +7,13 @@
 <body>
 <div class="container">
     <h1 class="mt-4">Edit Log Event</h1>
+
     <form th:action="@{/ui/logs/edit/{id}(id=${logEvent.id})}" th:object="${logEvent}" method="post">
+        <div class="mb-3">
+            <label for="timestamp" class="form-label">Date and Time (yyyy-MM-dd'T'HH:mm:ss)</label>
+            <input type="text" id="timestamp" name="timestamp" class="form-control" th:value="${logEvent.timestamp}" th:field="*{timestamp}" required>
+            <div th:if="${#fields.hasErrors('timestamp')}" th:errors="*{timestamp}" class="text-danger"></div>
+        </div>
         <div class="mb-3">
             <label for="type" class="form-label">Type</label>
             <select id="type" name="type" class="form-control" required>
@@ -16,20 +22,22 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="message" class="form-label">Message</label>
-            <input type="text" id="message" name="message" class="form-control" th:value="${logEvent.message}" required>
+            <label for="message" class="form-label">Message (50 characters max)</label>
+            <input type="text" id="message" name="message" class="form-control" th:value="${logEvent.message}" th:field="*{message}" required>
+            <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="text-danger"></div>
         </div>
         <div class="mb-3">
-            <label for="userId" class="form-label">User ID</label>
-            <input type="text" id="userId" name="userId" class="form-control" th:value="${logEvent.userId}" required>
+            <label for="userId" class="form-label">User ID (1 to 6 alphanumeric characters)</label>
+            <input type="text" id="userId" name="userId" class="form-control" th:value="${logEvent.userId}" th:field="*{userId}" required>
+            <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="text-danger"></div>
         </div>
         <div class="mb-3">
-            <label for="transactionId" class="form-label">Transaction ID</label>
-            <input type="text" id="transactionId" name="transactionId" class="form-control" th:value="${logEvent.transactionId}" required>
+            <label for="transactionId" class="form-label">Transaction ID (UUID)</label>
+            <input type="text" id="transactionId" name="transactionId" class="form-control" th:value="${logEvent.transactionId}" th:field="*{transactionId}" required>
+            <div th:if="${#fields.hasErrors('transactionId')}" th:errors="*{transactionId}" class="text-danger"></div>
         </div>
         <button type="submit" class="btn btn-primary">Submit Changes</button>
     </form>
 </div>
-<script src="/webjars/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

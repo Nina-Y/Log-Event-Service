@@ -7,28 +7,42 @@
 <body>
 <div class="container">
     <h1 class="mt-4">Add New Log Event</h1>
+
     <form th:action="@{/ui/logs/add}" th:object="${logEvent}" method="post">
+
+        <div class="mb-3">
+            <label for="timestamp" class="form-label">Date and Time</label>
+            <input type="text" id="timestamp" th:field="*{timestamp}" placeholder="yyyy-MM-dd'T'HH:mm:ss" class="form-control" required>
+            <div th:if="${#fields.hasErrors('timestamp')}" th:errors="*{timestamp}" class="text-danger"></div>
+        </div>
+
         <div class="mb-3">
             <label for="type" class="form-label">Type</label>
-            <select id="type" name="type" class="form-control" required>
+            <select id="type" th:field="*{type}" class="form-control" required>
                 <option th:each="type : ${EventType}" th:value="${type}" th:text="${type}"></option>
             </select>
         </div>
+
         <div class="mb-3">
             <label for="message" class="form-label">Message</label>
-            <input type="text" id="message" name="message" class="form-control" required>
+            <input type="text" id="message" th:field="*{message}" placeholder="50 characters max" class="form-control" required>
+            <div th:if="${#fields.hasErrors('message')}" th:errors="*{message}" class="text-danger"></div>
         </div>
+
         <div class="mb-3">
             <label for="userId" class="form-label">User ID</label>
-            <input type="text" id="userId" name="userId" class="form-control" required>
+            <input type="text" id="userId" th:field="*{userId}" placeholder="Enter 1 to 6 alphanumeric characters" class="form-control" required>
+            <div th:if="${#fields.hasErrors('userId')}" th:errors="*{userId}" class="text-danger"></div>
         </div>
+
         <div class="mb-3">
             <label for="transactionId" class="form-label">Transaction ID</label>
-            <input type="text" id="transactionId" name="transactionId" class="form-control" required>
+            <input type="text" id="transactionId" th:field="*{transactionId}" placeholder="Enter UUID" class="form-control" required>
+            <div th:if="${#fields.hasErrors('transactionId')}" th:errors="*{transactionId}" class="text-danger"></div>
         </div>
+
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 </div>
-<script src="/webjars/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

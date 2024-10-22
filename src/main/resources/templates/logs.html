@@ -7,41 +7,60 @@
 <body>
 <div class="container">
     <h1 class="mt-4">Event Logger</h1>
-    <div class="mt-5">
-        <a href="/ui/logs/add" class="btn btn-primary mb-3">Add new log event</a>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Timestamp</th>
-                <th>Type</th>
-                <th>Message</th>
-                <th>User ID</th>
-                <th>Transaction ID</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="logEvent : ${logEvents}">
-                <td th:text="${logEvent.id}">1</td>
-                <td th:text="${logEvent.timestamp}">2024-03-18 21:00:05</td>
-                <td th:text="${logEvent.type}">DEBUG</td>
-                <td th:text="${logEvent.message}">Data stored</td>
-                <td th:text="${logEvent.userId}">789654</td>
-                <td th:text="${logEvent.transactionId}">987546321-745689-4785123</td>
-                <td>
-                    <a th:href="@{/ui/logs/view/{id}(id=${logEvent.id})}" class="btn btn-primary btn-sm">View</a>
-                <a th:href="@{/ui/logs/edit/{id}(id=${logEvent.id})}" class="btn btn-warning btn-sm">Edit</a>
-                    <a th:href="@{/ui/logs/delete/{id}(id=${logEvent.id})}" class="btn btn-danger btn-sm"
-                       th:onclick="'return confirm(\'Are you sure you want to delete log event id ' + ${logEvent.id} + '?\');'">
-                        Delete
-                    </a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
+    <div style="text-align: center;">
+        <form method="get" onsubmit="return searchById();" style="display: inline-block;">
+            <div class="input-group" style="max-width: 170px;">
+                <input type="number" id="logEventId" class="form-control" placeholder="Enter ID" required>
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
     </div>
+
+
+    <a href="/ui/logs/add" class="btn btn-primary mb-3">Add new log event</a>
+
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Timestamp</th>
+            <th>Type</th>
+            <th>Message</th>
+            <th>User ID</th>
+            <th>Transaction ID</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="logEvent : ${logEvents}">
+            <td th:text="${logEvent.id}">1</td>
+            <td th:text="${logEvent.timestamp}">2024-03-18 21:00:05</td>
+            <td th:text="${logEvent.type}">DEBUG</td>
+            <td th:text="${logEvent.message}">Data stored</td>
+            <td th:text="${logEvent.userId}">789654</td>
+            <td th:text="${logEvent.transactionId}">987546321-745689-4785123</td>
+            <td>
+                <a th:href="@{/ui/logs/view/{id}(id=${logEvent.id})}" class="btn btn-primary btn-sm">View</a>
+                <a th:href="@{/ui/logs/edit/{id}(id=${logEvent.id})}" class="btn btn-warning btn-sm">Edit</a>
+                <a th:href="@{/ui/logs/delete/{id}(id=${logEvent.id})}" class="btn btn-danger btn-sm"
+                   th:onclick="'return confirm(\'Are you sure you want to delete log event id ' + ${logEvent.id} + '?\');'">
+                    Delete
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
-<script src="/webjars/bootstrap/5.0.2/js/bootstrap.bundle.min.js"></script>
+<script>
+    function searchById() {
+        const id = document.getElementById("logEventId").value;
+        if (id) {
+            window.location.href = `/ui/logs/view/${id}`;
+            return false;
+        }
+        return true;
+    }
+</script>
 </body>
 </html>

@@ -36,7 +36,7 @@ public class LogEventService {
             }
         } else {
             System.out.println("File does not exist. Creating new file with dummy data at: " + FILE_PATH);
-                logEvents = logEventData.initializeDummyData(this::generateNextId, logEvents);
+                logEvents = logEventData.initializeDummyData(this::generateNextId, logEvents); // logEvents = logEventData.initializeDummyData(() -> generateNextId(), logEvents);
                 saveLogEvents();
         }
     }

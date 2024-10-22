@@ -1,9 +1,8 @@
 package com.example.logeventservice.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.UUID;
 
 import java.time.LocalDateTime;
@@ -12,19 +11,23 @@ public class LogEvent {
 
     private int id;
 
-    @NotNull
+    @NotNull(message = "Timestamp is required")
+    @PastOrPresent(message = "Timestamp must be in the past or present")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime timestamp;
 
-    @NotNull
+    @NotNull(message = "Type is required")
     private EventType type;
 
-    @Size(max = 1024)
+    @NotBlank(message = "Message is required")
+    @Size(max = 50, message = "Message cannot exceed 50 characters")
     private String message;
 
+    @NotBlank(message = "User ID required")
     @Pattern(regexp = "^[a-zA-Z0-9]{1,6}$")
     private String userId;
 
-    @NotNull
+    @NotNull(message = "Transaction ID is required")
     private UUID transactionId;
 
     public LogEvent(int id, LocalDateTime timestamp, EventType type, String message, String userId, UUID transactionId) {
